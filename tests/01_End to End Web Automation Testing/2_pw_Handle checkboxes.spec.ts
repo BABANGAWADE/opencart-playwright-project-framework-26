@@ -128,9 +128,7 @@ test.describe('checkboxes', () => {
             }
             await page.waitForTimeout(2000);
 
-
-
-        })
+})
     })
 
 
