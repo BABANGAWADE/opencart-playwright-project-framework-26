@@ -15,7 +15,7 @@ test.afterEach('Closing the Apps',async ({page})=>{
 await page.close();
 
 })
-//Main test
+//Main tests
 test("Verify user able to upload single file of any format",async({page})=>{
 
     const singleFileInput= page.locator("#singleFileInput");
@@ -29,4 +29,17 @@ test("Verify user able to upload single file of any format",async({page})=>{
 
 })
 
+test.only("Verify user able to upload multiple file of any format",async({page})=>{
+
+    const multipleFilesInput= page.locator("#multipleFilesInput");
+    const UploadMultipleFileButton= page.getByText('Upload Multiple Files', { exact: true });
+    const MultipleFileStatusField=page.locator('#multipleFilesStatus');
+
+    await multipleFilesInput.setInputFiles(['tests/uploads/2mb-examplefile-com.txt','tests/uploads/4mb.doc']);
+    await UploadMultipleFileButton.click();
+    await expect(MultipleFileStatusField).toHaveText(/2mb-examplefile-com.txt/);
+    await page.waitForTimeout(5000);
+
+
+})
 })
